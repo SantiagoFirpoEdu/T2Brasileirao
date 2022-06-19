@@ -67,23 +67,7 @@ public class MatchHistory
     public void orderMatchesByDate()
     {
         Comparator<Match> matchDateComparator =
-                (match1, match2) -> (match1.getMonth() - match2.getMonth()) + (match1.getDay() - match2.getDay());
+                (match1, match2) -> 30 * (match1.getMonth() - match2.getMonth()) + (match1.getDay() - match2.getDay());
         Arrays.sort(matches, matchDateComparator);
-
-//        for (int i = 0; i < size; i++)
-//        {
-//            for (int j = 0; j < size - 1; j++)
-//            {
-//                if (matches[j].getMonth() == matches[j + 1].getMonth()
-//                 && matches[j].getDay() > matches[j + 1].getDay())
-//                    {
-//                        Match aux = matches[j];
-//                        matches[j] = matches[j + 1];
-//                        matches[j + 1] = aux;
-//                    }
-//            }
-//        }
     }
-
-    //
 }
