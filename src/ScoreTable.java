@@ -11,13 +11,13 @@ public class ScoreTable
     }
 
 
-    public void addTeam(Team team)
+    public final void addTeam(Team team)
     {
         table.add(team);
     }
 
 
-    public void removeTeam(int index)
+    public final void removeTeam(int index)
     {
         try
         {
@@ -30,7 +30,7 @@ public class ScoreTable
     }
 
 
-    public void changeTeam(int index, Team team)
+    public final void changeTeam(int index, Team team)
     {
         if (index >= 0 && index < table.size())
         {
@@ -39,7 +39,7 @@ public class ScoreTable
     }
 
 
-    public Team getTeam(int index)
+    public final Team getTeam(int index)
     {
         if (index >= 0 && index < table.size())
         {
@@ -61,7 +61,7 @@ public class ScoreTable
         return stringBuilder.toString();
     }
 
-    public void orderByPoints()
+    public final void orderByPoints()
     {
         Comparator<Team> pointsComparison = (team1, team2) -> team2.getPoints() - team1.getPoints();
         table.sort(pointsComparison);

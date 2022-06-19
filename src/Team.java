@@ -39,7 +39,7 @@ public class Team
 	 * @param match o resultado da partida
 	 * @throws IllegalArgumentException se match for null
 	 */
-	public void addMatch(Match match) throws IllegalArgumentException
+	public final void addMatch(Match match) throws IllegalArgumentException
 	{
 		if (match == null)
 		{
@@ -96,68 +96,68 @@ public class Team
 				winRatePointWise);
 	}
 
-	public String getName()
+	public final String getName()
 	{
 		return name;
 	}
 
-	private void setName(String name)
+	private final void setName(String name)
 	{
 		if (name.isBlank()) return;
 		this.name = name;
 	}
 
-	public int getPoints()
+	public final int getPoints()
 	{
 		return points;
 	}
 
-	public int getMatchesPlayed()
+	public final int getMatchesPlayed()
 	{
 		return matchesPlayed;
 	}
 
-	public int getWins()
+	public final int getWins()
 	{
 		return wins;
 	}
 
-	public int getDraws()
+	public final int getDraws()
 	{
 		return draws;
 	}
 
-	public int getLosses()
+	public final int getLosses()
 	{
 		return losses;
 	}
 
-	public int getGoalsFor()
+	public final int getGoalsFor()
 	{
 		return goalsFor;
 	}
 
-	public int getGoalsAgainst()
+	public final int getGoalsAgainst()
 	{
 		return goalsAgainst;
 	}
 
-	public int getGoalBalance()
+	public final int getGoalBalance()
 	{
 		return goalBalance;
 	}
 
-	public double getWinRatePointWise()
+	public final double getWinRatePointWise()
 	{
 		return winRatePointWise;
 	}
 
-	public int getId()
+	public final int getId()
 	{
 		return id;
 	}
 
-	public void setId(int id)
+	public final void setId(int id)
 	{
 		this.id = id;
 	}

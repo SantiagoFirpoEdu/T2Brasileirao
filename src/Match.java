@@ -56,7 +56,7 @@ public class Match
 	 * @param team o time que quer saber se perdeu
 	 * @return true se o time perdeu, false se não perdeu
 	 */
-	private boolean lost(Team team) {
+	private final boolean lost(Team team) {
 		if (isHomeTeam(team))
 		{
 			return homeTeamGoals < awayTeamGoals;
@@ -68,7 +68,7 @@ public class Match
 	 * @param team o time que quer saber os pontos
 	 * @return os pontos que o time ganhou
 	 */
-	public int getPoints(Team team) {
+	public final int getPoints(Team team) {
 		if (won(team))
 		{
 			return 3;
@@ -87,7 +87,7 @@ public class Match
 	 * @param team o time que quer saber o número de gols a favor de si
 	 * @return o número de gols a favor do time dado
 	 */
-	public int getGoalsFor(Team team) {
+	public final int getGoalsFor(Team team) {
 		if (isHomeTeam(team))
 		{
 			return homeTeamGoals;
@@ -102,11 +102,11 @@ public class Match
 	 * @param team o time que quer saber se está jogando em casa
 	 * @return true se o time está jogando em casa, false se não está jogando em casa
 	 */
-	private boolean isHomeTeam(Team team) {
+	private final boolean isHomeTeam(Team team) {
 		return Objects.equals(team, homeTeam);
 	}
 
-	public int getGoalsAgainst(Team team)
+	public final int getGoalsAgainst(Team team)
 	{
 		if (isHomeTeam(team))
 		{
@@ -122,7 +122,7 @@ public class Match
 	 * @param team o time que quer saber se ganhou
 	 * @return true se o time ganhou, false se não ganhou
 	 */
-	public boolean won(Team team) {
+	public final boolean won(Team team) {
 		if (isHomeTeam(team))
 		{
 			return homeTeamGoals > awayTeamGoals;
@@ -133,91 +133,91 @@ public class Match
 	/** Verifica se esta partida resultou em um empate
 	 * @return true se a partida resultou em um empate, false se não resultou em um empate
 	 */
-	public boolean tied() {
+	public final boolean tied() {
 		return homeTeamGoals == awayTeamGoals;
 	}
 
 	/**
 	 * Aplica os resultados desta partida para os dois times que jogaram nela
 	 * */
-	public void applyResultsToTeams() {
+	public final void applyResultsToTeams() {
 		homeTeam.addMatch(this);
 		awayTeam.addMatch(this);
 	}
 
-	public int getDay()
+	public final int getDay()
 	{
 		return day;
 	}
 
-	public void setDay(int day)
+	public final void setDay(int day)
 	{
 		this.day = day;
 	}
 
-	public int getMonth() {
+	public final int getMonth() {
 		return month;
 	}
 
-	public void setMonth(int month)
+	public final void setMonth(int month)
 	{
 		this.month = month;
 	}
 
-	public int getHour() {
+	public final int getHour() {
 		return hour;
 	}
 
-	public void setHour(int hour)
+	public final void setHour(int hour)
 	{
 		this.hour = hour;
 	}
 
-	public int getMinute()
+	public final int getMinute()
 	{
 		return minute;
 	}
 
-	public void setMinute(int minute)
+	public final void setMinute(int minute)
 	{
 		this.minute = minute;
 	}
 
-	public Team getHomeTeam()
+	public final Team getHomeTeam()
 	{
 		return homeTeam;
 	}
 
-	public void setHomeTeam(Team homeTeam)
+	public final void setHomeTeam(Team homeTeam)
 	{
 		this.homeTeam = homeTeam;
 	}
 
-	public Team getAwayTeam()
+	public final Team getAwayTeam()
 	{
 		return awayTeam;
 	}
 
-	public void setAwayTeam(Team awayTeam)
+	public final void setAwayTeam(Team awayTeam)
 	{
 		this.awayTeam = awayTeam;
 	}
 
-	public int getHomeTeamGoals() {
+	public final int getHomeTeamGoals() {
 		return homeTeamGoals;
 	}
 
-	public void setHomeTeamGoals(int homeTeamGoals)
+	public final void setHomeTeamGoals(int homeTeamGoals)
 	{
 		this.homeTeamGoals = homeTeamGoals;
 	}
 
-	public int getAwayTeamGoals()
+	public final int getAwayTeamGoals()
 	{
 		return awayTeamGoals;
 	}
 
-	public void setAwayTeamGoals(int awayTeamGoals)
+	public final void setAwayTeamGoals(int awayTeamGoals)
 	{
 		this.awayTeamGoals = awayTeamGoals;
 	}

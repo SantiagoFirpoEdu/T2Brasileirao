@@ -16,7 +16,7 @@ public class MatchHistory
 	/**
 	 * Insere uma partida na lista
 	 */
-	public void insertMatch(Match match)
+	public final void insertMatch(Match match)
 	{
 		matches.add(match);
 	}
@@ -24,7 +24,7 @@ public class MatchHistory
 	/**
 	 * Exclui uma partida da lista
 	 */
-	public void removeMatch(int index) throws IndexOutOfBoundsException
+	public final void removeMatch(int index) throws IndexOutOfBoundsException
 	{
 		matches.remove(index);
 	}
@@ -32,7 +32,7 @@ public class MatchHistory
 	/**
 	 * Altera uma partida da lista
 	 */
-	public void changeMatch(int index, Match match) throws IndexOutOfBoundsException
+	public final void changeMatch(int index, Match match) throws IndexOutOfBoundsException
 	{
 		matches.set(index, match);
 	}
@@ -40,7 +40,7 @@ public class MatchHistory
 	/**
 	 * Consulta uma partida da lista
 	 */
-	public Match getMatch(int index) throws IndexOutOfBoundsException
+	public final Match getMatch(int index) throws IndexOutOfBoundsException
 	{
 		return matches.get(index);
 	}
@@ -69,7 +69,7 @@ public class MatchHistory
 	 * Ordena a lista de partidas por data (Merge Sort usando a própria implementação do Java com um comparador
 	 * personalizado)
 	 */
-	public void orderMatchesByDate()
+	public final void orderMatchesByDate()
 	{
 		Comparator<Match> matchDateComparator =
 				(match1, match2) -> 30 * (match1.getMonth() - match2.getMonth()) + (match1.getDay() - match2.getDay());
@@ -79,7 +79,7 @@ public class MatchHistory
 	/**
 	 * Itera pela lista de partidas e aplica o seu resultado para ambos os times que jogaram nela
 	 * */
-	public void updateScores() {
+	public final void updateScores() {
 		for (Match match : matches)
 		{
 			if (match == null) continue;
