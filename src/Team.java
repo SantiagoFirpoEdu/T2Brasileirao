@@ -3,203 +3,189 @@ import java.util.Objects;
 
 public class Team
 {
-    private final int id;
-    private String name;
-    private int goalsFor;
-    private int goalsAgainst;
-    private int matchesTotal;
-    private int wins;
-    private int draws;
-    private int losses;
-    private int points;
-    private int goalBalance;
-    private double winRatePointWise;
+	private int id;
+	private String name;
+	private int points;
+	private int matchesPlayed;
+	private int wins;
+	private int draws;
+	private int losses;
+	private int goalsFor;
+	private int goalsAgainst;
+	private int goalBalance;
+	private double winRatePointWise;
 
-    public Team(int id, String name)
-    {
-        this.id = id;
-        this.name = name;
-        this.goalsFor = 0;
-        this.goalsAgainst = 0;
-        this.matchesTotal = 0;
-        this.wins = 0;
-        this.draws = 0;
-        this.losses = 0;
-        this.points = 0;
-        this.goalBalance = 0;
-        this.winRatePointWise = 0;
-    }
+	public Team(int id, String name) throws IllegalArgumentException
+	{
+		if (id < 0)
+		{
+			throw new IllegalArgumentException("Id can't be lower than 0");
+		}
+		this.setId(id);
+		this.name = name.isBlank() ? ("Time " + id) : name;
+		points = 0;
+		matchesPlayed = 0;
+		wins = 0;
+		draws = 0;
+		losses = 0;
+		goalsFor = 0;
+		goalsAgainst = 0;
+		goalBalance = 0;
+		winRatePointWise = 0.0;
+	}
 
-    //Atualiza toda a tabela (exceto código e nome do time)
-    public void addMatch(Match match)
-    {
-        if (goalsFor >= 0 && goalsAgainst >= 0) {
-            incrementMatchesTotal();
-            updateGoalBalance(goalsFor, goalsAgainst);
-            updateVictoriesOrLosses(goalsFor, goalsAgainst);
-            updatePoints();
-        }
-    }
+	/**
+	 * Aplica os resultados de uma partida para o seu estado atual, calculando os pontos, gols marcados e gols sofridos
+	 * @param match o resultado da partida
+	 * @throws IllegalArgumentException se match for null
+	 */
+	public void addMatch(Match match) throws IllegalArgumentException
+	{
+		if (match == null)
+		{
+			throw new IllegalArgumentException("match parameter can't be null");
+		}
+		matchesPlayed++;
+		goalsFor += match.getGoalsFor(this);
+		goalsAgainst += match.getGoalsAgainst(this);
+		points += match.getPoints(this);
+		winRatePointWise = points / (matchesPlayed * 3.0) * 100.00;
+		if (match.won(this))
+		{
+			wins++;
+		}
+		else if (match.tied())
+		{
+			draws++;
+		}
+		else
+		{
+			losses++;
+		}
+		goalBalance = goalsFor - goalsAgainst;
+	}
 
-    //Atualiza o total de jogos
-    private void incrementMatchesTotal()
-    {
-        matchesTotal++;
-    }
 
-    //Atualiza viórias e derrotas
-    public void updateVictoriesOrLosses(int goalsFor, int goalsAgainst)
-    {
-        if (goalsFor > goalsAgainst)
-        {
-            wins += 1;
-        }
-        else if (goalsAgainst > goalsFor)
-        {
-            losses += 1;
-        }
-        else
-        {
-            draws += 1;
-        }
-    }
+	@Override
+	public String toString()
+	{
+		return MessageFormat.format(
+				"""
+			   Código do Clube: {0},
+			   Nome do Clube: ''{1}'',
+			   Gols pró: {2},
+			   Gols contra: {3},
+			   Total de jogos: {4},
+			   Total de vitórias: {5},
+			   Total de empates: {6},
+			   Total de derrotas: {7},
+			   Total de pontos: {8},
+			   Saldo de gols: {9},
+			   Aproveitamento: {10}%
+			   """,
+				id,
+				name,
+				goalsFor,
+				goalsAgainst,
+				matchesPlayed,
+				wins,
+				draws,
+				losses,
+				points,
+				goalBalance,
+				winRatePointWise);
+	}
 
-    //Atualiza número de pontos e aproveitamento
-    public void updatePoints()
-    {
-        points = 3 * wins + draws;
-        winRatePointWise = points / (3.0 * matchesTotal) * 100.0;
-    }
+	public String getName()
+	{
+		return name;
+	}
 
-    /**
-     * Atualiza número de gols pró e contra e saldo de gols
-     * @param goalsFor gols a favor do time de casa
-     * @param goalsAgainst gols contra o time de casa
-     */
-    public void updateGoalBalance(int goalsFor, int goalsAgainst)
-    {
-        this.goalsFor += goalsFor;
-        this.goalsAgainst += goalsAgainst;
-        goalBalance += (goalsFor - goalsAgainst);
-    }
+	private void setName(String name)
+	{
+		if (name.isBlank()) return;
+		this.name = name;
+	}
 
-    //Escreve todas as informações na tela
-    @Override
-    public String toString()
-    {
-        return MessageFormat.format(
-                 """
-                 Código do Clube: {0},
-                Nome do Clube: ''{1}'',
-                Gols pró: {2},
-                Gols contra: {3},
-                Total de jogos: {4},
-                Total de vitórias: {5},
-                Total de empates: {6},
-                Total de derrotas: {7},
-                Total de pontos: {8},
-                Saldo de gols: {9},
-                Aproveitamento: {10}%
-                """,
-                id,
-                name,
-                goalsFor,
-                goalsAgainst,
-                matchesTotal,
-                wins,
-                draws,
-                losses,
-                points,
-                goalBalance,
-                winRatePointWise);
-    }
+	public int getPoints()
+	{
+		return points;
+	}
 
-    //Todos os getters e o setter do nome do Clube
-    public int getId()
-    {
-        return id;
-    }
+	public int getMatchesPlayed()
+	{
+		return matchesPlayed;
+	}
 
-    public String getName()
-    {
-        return name;
-    }
+	public int getWins()
+	{
+		return wins;
+	}
 
-    public int getGoalsFor()
-    {
-        return goalsFor;
-    }
+	public int getDraws()
+	{
+		return draws;
+	}
 
-    public int getGoalsAgainst()
-    {
-        return goalsAgainst;
-    }
+	public int getLosses()
+	{
+		return losses;
+	}
 
-    public int getMatchesTotal()
-    {
-        return matchesTotal;
-    }
+	public int getGoalsFor()
+	{
+		return goalsFor;
+	}
 
-    public int getWins()
-    {
-        return wins;
-    }
+	public int getGoalsAgainst()
+	{
+		return goalsAgainst;
+	}
 
-    public int getDraws()
-    {
-        return draws;
-    }
+	public int getGoalBalance()
+	{
+		return goalBalance;
+	}
 
-    public int getLosses()
-    {
-        return losses;
-    }
+	public double getWinRatePointWise()
+	{
+		return winRatePointWise;
+	}
 
-    public int getPoints()
-    {
-        return points;
-    }
+	public int getId()
+	{
+		return id;
+	}
 
-    public int getGoalBalance()
-    {
-        return goalBalance;
-    }
+	public void setId(int id)
+	{
+		this.id = id;
+	}
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (o == null || getClass() != o.getClass())
+		{
+			return false;
+		}
+		Team team = (Team) o;
+		return id == team.id
+				&& goalsFor == team.goalsFor
+				&& goalsAgainst == team.goalsAgainst
+				&& matchesPlayed == team.matchesPlayed
+				&& wins == team.wins
+				&& draws == team.draws
+				&& losses == team.losses
+				&& points == team.points && goalBalance == team.goalBalance && Double.compare(team.winRatePointWise, winRatePointWise) == 0 && name.equals(team.name);
+	}
 
-    public double getWinRatePointWise()
-    {
-        return winRatePointWise;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
-    @Override
-    public boolean equals(Object o)
-    {
-        if (this == o)
-        {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass())
-        {
-            return false;
-        }
-        Team team = (Team) o;
-        return id == team.id
-            && goalsFor == team.goalsFor
-            && goalsAgainst == team.goalsAgainst
-            && matchesTotal == team.matchesTotal
-            && wins == team.wins
-            && draws == team.draws
-            && losses == team.losses
-            && points == team.points && goalBalance == team.goalBalance && Double.compare(team.winRatePointWise, winRatePointWise) == 0 && name.equals(team.name);
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return Objects.hash(id, name, goalsFor, goalsAgainst, matchesTotal, wins, draws, losses, points, goalBalance, winRatePointWise);
-    }
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(id, name, goalsFor, goalsAgainst, matchesPlayed, wins, draws, losses, points, goalBalance, winRatePointWise);
+	}
 }
