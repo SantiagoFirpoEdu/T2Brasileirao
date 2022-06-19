@@ -10,11 +10,12 @@ public class Interface
 {
     public static void main(String[] args)
     {
-        ListaDePartidas lista = new ListaDePartidas();
-        lista.inserePartida(new Partida("Ceramica", "Inter", 1, 0, 1, 1, 16, 30));
-        lista.inserePartida(new Partida("Ceramica", "Inter", 1, 0, 1, 1, 16, 30));
+        Team ceramica = new Team(1, "Cerâmica");
+        Team internacional = new Team(2, "Internacional");
+        MatchHistory history = new MatchHistory();
+        history.insertMatch(new Match(ceramica, internacional, 1, 0, 1, 1, 16, 30));
+        history.insertMatch(new Match(ceramica, internacional, 1, 0, 1, 1, 16, 30));
 
-
-        lista.exibeLista();
+        history.displayMatches();
     }
 }
