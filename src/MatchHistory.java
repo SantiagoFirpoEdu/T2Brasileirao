@@ -70,4 +70,12 @@ public class MatchHistory
                 (match1, match2) -> 30 * (match1.getMonth() - match2.getMonth()) + (match1.getDay() - match2.getDay());
         Arrays.sort(matches, matchDateComparator);
     }
+
+    public void updateScores()
+    {
+        for (Match match : matches)
+        {
+            match.applyResultsToTeams();
+        }
+    }
 }
