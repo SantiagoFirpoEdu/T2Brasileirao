@@ -38,7 +38,7 @@ public class ScoreTable
 
     public void changeTeam(int index, Team team)
     {
-        if(index >= 0 && index < size)
+        if (index >= 0 && index < size)
         {
             table[index] = team;
         }
@@ -47,7 +47,7 @@ public class ScoreTable
 
     public Team getTeam(int index)
     {
-        if(index >= 0 && index < size)
+        if (index >= 0 && index < size)
         {
             return table[index];
         }

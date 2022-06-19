@@ -16,7 +16,7 @@ public class MatchHistory
     //Insere uma partida na lista
     public void insertMatch(Match match)
     {
-        if(size < matches.length)
+        if (size < matches.length)
         {
             matches[size] = match;
             size++;
@@ -26,7 +26,7 @@ public class MatchHistory
     //Exclui uma partida da lista
     public void removeMatch(int posicao)
     {
-        if(posicao >= 0 && posicao < size)
+        if (posicao >= 0 && posicao < size)
         {
             if (size - 1 >= posicao) {
                 System.arraycopy(matches, posicao + 1, matches, posicao, size - 1 - posicao);
@@ -38,7 +38,7 @@ public class MatchHistory
     //Altera uma partida da lista
     public void changeMatch(int index, Match match)
     {
-        if(index >= 0 && index < size)
+        if (index >= 0 && index < size)
         {
             matches[index] = match;
         }
@@ -47,7 +47,7 @@ public class MatchHistory
     //Consulta uma partida da lista
     public Match getMatch(int index)
     {
-        if(index >= 0 && index < size)
+        if (index >= 0 && index < size)
         {
             return matches[index];
         }
