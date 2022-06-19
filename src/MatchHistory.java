@@ -55,12 +55,18 @@ public class MatchHistory
     }
 
     //Exibe a lista de partidas
-    public void displayMatches()
+    @Override
+    public String toString()
     {
+        StringBuilder teamsDisplay = new StringBuilder();
         for (int i = 0; i < size; i++)
         {
-            Console.log(i + "- " + matches[i].toString());
+            teamsDisplay.append(i);
+            teamsDisplay.append('-');
+            teamsDisplay.append(matches[i].toString());
+            teamsDisplay.append('\n');
         }
+        return teamsDisplay.toString();
     }
 
     //Ordena a lista de partidas por data (Bubble sort usando a data como chave)
