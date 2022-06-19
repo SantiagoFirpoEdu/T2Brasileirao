@@ -1,3 +1,4 @@
+import java.text.MessageFormat;
 import java.util.Objects;
 
 public class Team
@@ -86,17 +87,31 @@ public class Team
     @Override
     public String toString()
     {
-        return " Código do Clube:" + id +
-                ", Nome do Clube:'" + name + '\'' +
-                ", Gols pró:" + goalsFor +
-                ", Gols contra:" + goalsAgainst +
-                ", Total de jogos:" + matchesTotal +
-                ", Total de vitórias:" + wins +
-                ", Total de empates:" + draws +
-                ", Total de derrotas:" + losses +
-                ", Total de pontos:" + points +
-                ", Saldo de gols: " + goalBalance +
-                ", Aproveitamento: " + winRatePointWise + '%';
+        return MessageFormat.format(
+                 """
+                 Código do Clube: {0},
+                Nome do Clube: ''{1}'',
+                Gols pró: {2},
+                Gols contra: {3},
+                Total de jogos: {4},
+                Total de vitórias: {5},
+                Total de empates: {6},
+                Total de derrotas: {7},
+                Total de pontos: {8},
+                Saldo de gols: {9},
+                Aproveitamento: {10}%
+                """,
+                id,
+                name,
+                goalsFor,
+                goalsAgainst,
+                matchesTotal,
+                wins,
+                draws,
+                losses,
+                points,
+                goalBalance,
+                winRatePointWise);
     }
 
     //Todos os getters e o setter do nome do Clube
