@@ -1,87 +1,89 @@
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Comparator;
 
 public class MatchHistory
 {
-    private final Match[] matches;
-    private int size;
+	private final ArrayList<Match> matches;
 
-    //Construtor(cria a lista)
-    public MatchHistory()
-    {
-        matches = new Match[20];
-        size = 0;
-    }
+	/**
+	 * Construtor (cria a lista)
+	 */
+	public MatchHistory()
+	{
+		matches = new ArrayList<>();
+	}
 
-    //Insere uma partida na lista
-    public void insertMatch(Match match)
-    {
-        if (size < matches.length)
-        {
-            matches[size] = match;
-            size++;
-        }
-    }
+	/**
+	 * Insere uma partida na lista
+	 */
+	public void insertMatch(Match match)
+	{
+		matches.add(match);
+	}
 
-    //Exclui uma partida da lista
-    public void removeMatch(int posicao)
-    {
-        if (posicao >= 0 && posicao < size)
-        {
-            if (size - 1 >= posicao) {
-                System.arraycopy(matches, posicao + 1, matches, posicao, size - 1 - posicao);
-            }
-            size--;
-        }
-    }
+	/**
+	 * Exclui uma partida da lista
+	 */
+	public void removeMatch(int index) throws IndexOutOfBoundsException
+	{
+		matches.remove(index);
+	}
 
-    //Altera uma partida da lista
-    public void changeMatch(int index, Match match)
-    {
-        if (index >= 0 && index < size)
-        {
-            matches[index] = match;
-        }
-    }
+	/**
+	 * Altera uma partida da lista
+	 */
+	public void changeMatch(int index, Match match) throws IndexOutOfBoundsException
+	{
+		matches.set(index, match);
+	}
 
-    //Consulta uma partida da lista
-    public Match getMatch(int index)
-    {
-        if (index >= 0 && index < size)
-        {
-            return matches[index];
-        }
-        return null;
-    }
+	/**
+	 * Consulta uma partida da lista
+	 */
+	public Match getMatch(int index) throws IndexOutOfBoundsException
+	{
+		return matches.get(index);
+	}
 
-    //Exibe a lista de partidas
-    @Override
-    public String toString()
-    {
-        StringBuilder teamsDisplay = new StringBuilder();
-        for (int i = 0; i < size; i++)
-        {
-            teamsDisplay.append(i);
-            teamsDisplay.append('-');
-            teamsDisplay.append(matches[i].toString());
-            teamsDisplay.append('\n');
-        }
-        return teamsDisplay.toString();
-    }
+	/**
+	 * Exibe a lista de partidas
+	 */
+	@Override
+	public String toString()
+	{
+		StringBuilder teamsDisplay = new StringBuilder();
+		int size = matches.size();
+		for (int i = 0; i < size; i++)
+		{
+			Match match = matches.get(i);
+			if (match == null) continue;
+			teamsDisplay.append(i);
+			teamsDisplay.append('-');
+			teamsDisplay.append(match);
+			teamsDisplay.append('\n');
+		}
+		return teamsDisplay.toString();
+	}
 
-    //Ordena a lista de partidas por data (Bubble sort usando a data como chave)
-    public void orderMatchesByDate()
-    {
-        Comparator<Match> matchDateComparator =
-                (match1, match2) -> 30 * (match1.getMonth() - match2.getMonth()) + (match1.getDay() - match2.getDay());
-        Arrays.sort(matches, matchDateComparator);
-    }
+	/**
+	 * Ordena a lista de partidas por data (Merge Sort usando a própria implementação do Java com um comparador
+	 * personalizado)
+	 */
+	public void orderMatchesByDate()
+	{
+		Comparator<Match> matchDateComparator =
+				(match1, match2) -> 30 * (match1.getMonth() - match2.getMonth()) + (match1.getDay() - match2.getDay());
+		matches.sort(matchDateComparator);
+	}
 
-    public void updateScores()
-    {
-        for (Match match : matches)
-        {
-            match.applyResultsToTeams();
-        }
-    }
+	/**
+	 * Itera pela lista de partidas e aplica o seu resultado para ambos os times que jogaram nela
+	 * */
+	public void updateScores() {
+		for (Match match : matches)
+		{
+			if (match == null) continue;
+			match.applyResultsToTeams();
+		}
+	}
 }

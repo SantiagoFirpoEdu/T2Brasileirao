@@ -1,71 +1,70 @@
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Comparator;
 
 public class ScoreTable
 {
-    private final Team[] table;
-    private int size;
+    private final ArrayList<Team> table;
 
     public ScoreTable()
     {
-        table = new Team[20];
-        size = 0;
+        table = new ArrayList<>();
     }
 
 
     public void addTeam(Team team)
     {
-        if (size < table.length)
-        {
-            table[size] = team;
-            size++;
-        }
+        table.add(team);
     }
 
 
     public void removeTeam(int index)
     {
-        if (index >= 0 && index < size)
+        try
         {
-            if (size - 1 - index >= 0)
-            {
-                System.arraycopy(table, index + 1, table, index, size - 1 - index);
-            }
-            size--;
+            table.remove(index);
+        }
+        catch (IndexOutOfBoundsException e)
+        {
+            Console.log("O índice inserido é inválido.");
         }
     }
 
 
     public void changeTeam(int index, Team team)
     {
-        if (index >= 0 && index < size)
+        if (index >= 0 && index < table.size())
         {
-            table[index] = team;
+            table.set(index, team);
         }
     }
 
 
     public Team getTeam(int index)
     {
-        if (index >= 0 && index < size)
+        if (index >= 0 && index < table.size())
         {
-            return table[index];
+            return table.get(index);
         }
         return null;
     }
 
-    public void displayTable()
+    @Override
+    public String toString()
     {
-        for (int i = 1; i <= size; i++)
+        orderByPoints();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Team team : table)
         {
-            Console.log(table[i].toString());
+            stringBuilder.append(team.toString());
+            stringBuilder.append('\n');
         }
+        return stringBuilder.toString();
     }
 
     public void orderByPoints()
     {
         Comparator<Team> pointsComparison = (team1, team2) -> team2.getPoints() - team1.getPoints();
-        Arrays.sort(table, pointsComparison);
+        table.sort(pointsComparison);
     }
 
 
