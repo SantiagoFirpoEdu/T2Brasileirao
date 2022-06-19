@@ -16,6 +16,7 @@ public class Interface
         history.insertMatch(new Match(ceramica, internacional, 1, 0, 1, 1, 16, 30));
         history.insertMatch(new Match(ceramica, internacional, 1, 0, 1, 1, 16, 30));
 
+        history.updateScores();
         history.displayMatches();
     }
 }
