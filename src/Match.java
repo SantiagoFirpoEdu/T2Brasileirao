@@ -56,7 +56,7 @@ public class Match
 	 * @param team o time que quer saber se perdeu
 	 * @return true se o time perdeu, false se não perdeu
 	 */
-	private final boolean lost(Team team) {
+	private boolean lost(Team team) {
 		if (isHomeTeam(team))
 		{
 			return homeTeamGoals < awayTeamGoals;
@@ -102,7 +102,7 @@ public class Match
 	 * @param team o time que quer saber se está jogando em casa
 	 * @return true se o time está jogando em casa, false se não está jogando em casa
 	 */
-	private final boolean isHomeTeam(Team team) {
+	private boolean isHomeTeam(Team team) {
 		return Objects.equals(team, homeTeam);
 	}
 
