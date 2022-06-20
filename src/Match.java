@@ -25,7 +25,7 @@ public class Match
 		{
 			this.month = month;
 		}
-		if (hour >= 0 && hour <= 24)
+		if (hour >= 0 && hour < 24)
 		{
 			this.hour = hour;
 		}
@@ -56,7 +56,8 @@ public class Match
 	 * @param team o time que quer saber se perdeu
 	 * @return true se o time perdeu, false se não perdeu
 	 */
-	private boolean lost(Team team) {
+	private boolean lost(Team team)
+	{
 		if (isHomeTeam(team))
 		{
 			return homeTeamGoals < awayTeamGoals;
