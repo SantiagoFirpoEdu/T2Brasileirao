@@ -1,3 +1,5 @@
+package com.brasileirao.utility;
+
 public class Console
 {
 	private Console() {}

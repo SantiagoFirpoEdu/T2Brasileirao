@@ -1,3 +1,5 @@
+package com.brasileirao.model;
+
 import java.text.MessageFormat;
 import java.util.Objects;
 
@@ -15,7 +17,14 @@ public class Match
 	/**
 	 * valida a entrada dos dados no construtor
 	 */
-	public Match(Team homeTeam, Team awayTeam, int homeTeamGoals, int awayTeamGoals, int day, int month, int hour, int minute)
+	public Match(Team homeTeam,
+	             Team awayTeam,
+	             int homeTeamGoals,
+	             int awayTeamGoals,
+	             int day,
+	             int month,
+	             int hour,
+	             int minute)
 	{
 		if (day >= 1 && day <= 31)
 		{
@@ -69,7 +78,8 @@ public class Match
 	 * @param team o time que quer saber os pontos
 	 * @return os pontos que o time ganhou
 	 */
-	public final int getPoints(Team team) {
+	public final int getPoints(Team team)
+	{
 		if (won(team))
 		{
 			return 3;
@@ -88,7 +98,8 @@ public class Match
 	 * @param team o time que quer saber o número de gols a favor de si
 	 * @return o número de gols a favor do time dado
 	 */
-	public final int getGoalsFor(Team team) {
+	public final int getGoalsFor(Team team)
+	{
 		if (isHomeTeam(team))
 		{
 			return homeTeamGoals;
@@ -103,7 +114,8 @@ public class Match
 	 * @param team o time que quer saber se está jogando em casa
 	 * @return true se o time está jogando em casa, false se não está jogando em casa
 	 */
-	private boolean isHomeTeam(Team team) {
+	private boolean isHomeTeam(Team team)
+	{
 		return Objects.equals(team, homeTeam);
 	}
 
@@ -123,7 +135,8 @@ public class Match
 	 * @param team o time que quer saber se ganhou
 	 * @return true se o time ganhou, false se não ganhou
 	 */
-	public final boolean won(Team team) {
+	public final boolean won(Team team)
+	{
 		if (isHomeTeam(team))
 		{
 			return homeTeamGoals > awayTeamGoals;
@@ -134,14 +147,16 @@ public class Match
 	/** Verifica se esta partida resultou em um empate
 	 * @return true se a partida resultou em um empate, false se não resultou em um empate
 	 */
-	public final boolean tied() {
+	public final boolean tied()
+	{
 		return homeTeamGoals == awayTeamGoals;
 	}
 
 	/**
 	 * Aplica os resultados desta partida para os dois times que jogaram nela
 	 * */
-	public final void applyResultsToTeams() {
+	public final void applyResultsToTeams()
+	{
 		homeTeam.addMatch(this);
 		awayTeam.addMatch(this);
 	}
@@ -156,7 +171,8 @@ public class Match
 		this.day = day;
 	}
 
-	public final int getMonth() {
+	public final int getMonth()
+	{
 		return month;
 	}
 
@@ -165,7 +181,8 @@ public class Match
 		this.month = month;
 	}
 
-	public final int getHour() {
+	public final int getHour()
+	{
 		return hour;
 	}
 
@@ -204,7 +221,8 @@ public class Match
 		this.awayTeam = awayTeam;
 	}
 
-	public final int getHomeTeamGoals() {
+	public final int getHomeTeamGoals()
+	{
 		return homeTeamGoals;
 	}
 

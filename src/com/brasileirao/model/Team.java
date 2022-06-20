@@ -1,3 +1,5 @@
+package com.brasileirao.model;
+
 import java.text.MessageFormat;
 import java.util.Objects;
 

@@ -1,3 +1,5 @@
+package com.brasileirao.model;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 
