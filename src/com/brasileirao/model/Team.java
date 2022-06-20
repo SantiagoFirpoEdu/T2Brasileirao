@@ -164,17 +164,17 @@ public class Team
 		this.id = id;
 	}
 	@Override
-	public boolean equals(Object o)
+	public boolean equals(Object other)
 	{
-		if (this == o)
+		if (this == other)
 		{
 			return true;
 		}
-		if (o == null || getClass() != o.getClass())
+		if (other == null || getClass() != other.getClass())
 		{
 			return false;
 		}
-		Team team = (Team) o;
+		Team team = (Team) other;
 		return id == team.id
 				&& goalsFor == team.goalsFor
 				&& goalsAgainst == team.goalsAgainst
