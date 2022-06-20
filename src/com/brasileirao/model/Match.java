@@ -34,7 +34,7 @@ public class Match
 		{
 			this.month = month;
 		}
-		if (hour >= 0 && hour < 24)
+		if (hour >= 0 && hour <= 23)
 		{
 			this.hour = hour;
 		}
