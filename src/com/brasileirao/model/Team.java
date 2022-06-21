@@ -2,10 +2,11 @@ package com.brasileirao.model;
 
 import java.text.MessageFormat;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Team
 {
-	private int id;
+	private UUID id;
 	private String name;
 	private int points;
 	private int matchesPlayed;
@@ -17,12 +18,8 @@ public class Team
 	private int goalBalance;
 	private double winRatePointWise;
 
-	public Team(int id, String name) throws IllegalArgumentException
+	public Team(UUID id, String name) throws IllegalArgumentException
 	{
-		if (id < 0)
-		{
-			throw new IllegalArgumentException("Id can't be lower than 0");
-		}
 		this.setId(id);
 		this.name = name.isBlank() ? ("Time " + id) : name;
 		points = 0;
@@ -154,14 +151,14 @@ public class Team
 		return winRatePointWise;
 	}
 
-	public final int getId()
+	public final UUID getId()
 	{
 		return id;
 	}
 
-	public final void setId(int id)
+	public final void setId(UUID id)
 	{
-		this.id = id;
+		this.id = new UUID(id.getMostSignificantBits(), id.getLeastSignificantBits());
 	}
 	@Override
 	public boolean equals(Object other)
