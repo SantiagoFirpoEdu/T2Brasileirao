@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class Match
 {
-	private final Calendar date;
+	public final Calendar date;
 	private Team homeTeam;
 	private Team awayTeam;
 	private int homeTeamGoals;
