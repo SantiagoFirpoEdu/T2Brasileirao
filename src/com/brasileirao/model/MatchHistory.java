@@ -1,18 +1,20 @@
 package com.brasileirao.model;
 
+import com.brasileirao.model.collections.CustomList;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 
 public class MatchHistory
 {
-	private final ArrayList<Match> matches;
+	private final CustomList<Match> matches;
 
 	/**
 	 * Construtor (cria a lista)
 	 */
 	public MatchHistory()
 	{
-		matches = new ArrayList<>();
+		matches = new CustomList<>();
 	}
 
 	/**
@@ -53,6 +55,7 @@ public class MatchHistory
 	@Override
 	public String toString()
 	{
+		orderMatchesByDate();
 		StringBuilder teamsDisplay = new StringBuilder();
 		int size = matches.size();
 		for (int i = 0; i < size; i++)
@@ -73,17 +76,17 @@ public class MatchHistory
 	 */
 	public final void orderMatchesByDate()
 	{
-		Comparator<Match> matchDateComparator =
-				(match1, match2) -> 30 * (match1.getMonth() - match2.getMonth()) + (match1.getDay() - match2.getDay());
-		matches.sort(matchDateComparator);
+		Comparator<Match> matchDateComparator = Comparator.comparing(match -> match.date);
+		matches.bubbleSort(matchDateComparator);
 	}
 
 	/**
 	 * Itera pela lista de partidas e aplica o seu resultado para ambos os times que jogaram nela
 	 * */
 	public final void updateScores() {
-		for (Match match : matches)
+		for (int i = 0; i < matches.size(); i++)
 		{
+			Match match = matches.get(i);
 			if (match == null) continue;
 			match.applyResultsToTeams();
 		}

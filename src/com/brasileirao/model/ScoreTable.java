@@ -1,17 +1,17 @@
 package com.brasileirao.model;
 
+import com.brasileirao.model.collections.CustomList;
 import com.brasileirao.utility.Console;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 
 public class ScoreTable
 {
-    private final ArrayList<Team> table;
+    private final CustomList<Team> table;
 
     public ScoreTable()
     {
-        table = new ArrayList<>();
+        table = new CustomList<>(20);
     }
 
 
@@ -57,9 +57,11 @@ public class ScoreTable
     {
         orderByPoints();
         StringBuilder stringBuilder = new StringBuilder();
-        for (Team team : table)
+        for (int i = 0; i < table.size(); i++)
         {
-            stringBuilder.append(team.toString());
+            Team team = table.get(i);
+            if (team == null) continue;
+            stringBuilder.append(team);
             stringBuilder.append('\n');
         }
         return stringBuilder.toString();
@@ -68,7 +70,7 @@ public class ScoreTable
     public final void orderByPoints()
     {
         Comparator<Team> pointsComparison = (team1, team2) -> team2.getPoints() - team1.getPoints();
-        table.sort(pointsComparison);
+        table.bubbleSort(pointsComparison);
     }
 
 
