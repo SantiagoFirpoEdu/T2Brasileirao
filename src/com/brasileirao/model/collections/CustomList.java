@@ -90,9 +90,8 @@ public class CustomList<TElementType>
 
 	private void resizeArray()
 	{
-		int length = data.length;
-		Object[] newArray = new Object[2 * length];
-		System.arraycopy(data, 0, newArray, 0, length);
+		Object[] newArray = new Object[2 * data.length];
+		System.arraycopy(data, 0, newArray, 0, data.length);
 		data = newArray;
 	}
 
