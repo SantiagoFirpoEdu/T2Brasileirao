@@ -1,10 +1,7 @@
 package com.brasileirao.application;
 
-import com.brasileirao.model.MatchDate;
-import com.brasileirao.model.Team;
+import com.brasileirao.model.*;
 import com.brasileirao.utility.Console;
-import com.brasileirao.model.Match;
-import com.brasileirao.model.ScoreTable;
 
 import java.util.Scanner;
 import java.util.UUID;
@@ -18,31 +15,28 @@ import java.util.UUID;
 public class Interface
 {
 	public static final String INVALID_INPUT_DEFAULT_MESSAGE = "Entrada inválida.";
+	public static final MatchHistory matchHistory = new MatchHistory();
+	public static final ScoreTable scoreTable = new ScoreTable();
 
 	private Interface() {}
 
 	public static void main(String[] args)
 	{
-		ScoreTable scoreTable = new ScoreTable();
 		Scanner input = new Scanner(System.in);
-		Console.log("Insira blablabla");
-		String choice = input.next();
-
-		switch(choice)
+		Console.log("Insira uma opção entre 1 e 2");
+		boolean shouldQuit = false;
+		while (!shouldQuit)
 		{
-			case "1":
+			String choice = input.next();
+			switch (choice)
 			{
-				matchHistory();
-			}
-			case "2":
-			{
-				break;
-			}
-
-			default:
-			{
-				Console.log("Escolha inválida");
-				break;
+				case "1" -> matchHistory();
+				case "2" -> Console.log(scoreTable.toString());
+				default ->
+				{
+					Console.log("Escolha inválida");
+					shouldQuit = true;
+				}
 			}
 		}
 
@@ -56,21 +50,7 @@ public class Interface
 		switch (matchOptionInput)
 		{
 			case "1" -> addMatch();
-			case "2" ->
-			{
-			}
-			case "3" ->
-			{
-			}
-			case "4" ->
-			{
-			}
-			case "5" ->
-			{
-			}
-			case "6" ->
-			{
-			}
+			case "6" -> Console.log(matchHistory.toString());
 			default -> Console.log(INVALID_INPUT_DEFAULT_MESSAGE);
 		}
 	}
@@ -102,6 +82,7 @@ public class Interface
 		Team team1 = new Team(UUID.randomUUID(), homeTeamName);
 		Team team2 = new Team(UUID.randomUUID(), awayTeamName);
 		Match match = new Match(team1, team2, homeTeamGoals, awayTeamGols, new MatchDate(gameDay, gameMonth, gameHour, gameMinute));
+		matchHistory.insertMatch(match);
 		Console.log("Partida adicionada com sucesso! " + match);
 	}
 
