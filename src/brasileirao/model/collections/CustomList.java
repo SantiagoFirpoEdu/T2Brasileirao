@@ -2,9 +2,11 @@ package brasileirao.model.collections;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.function.Predicate;
 
 public class CustomList<TElementType>
 {
+	private static final int INVALID_INDEX = -1;
 	private Object[] data;
 	private int size;
 	private static final int DEFAULT_CAPACITY = 10;
@@ -175,6 +177,18 @@ public class CustomList<TElementType>
 			rightIndex++;
 			targetIndex++;
 		}
+	}
+
+	public int linearSearch(Predicate<TElementType> predicate)
+	{
+		for (int i = 0; i < size(); i++)
+		{
+			if (predicate.test(get(i)))
+			{
+				return i;
+			}
+		}
+		return INVALID_INDEX;
 	}
 }
 
