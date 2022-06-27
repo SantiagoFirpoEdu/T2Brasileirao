@@ -45,14 +45,43 @@ public class Interface
 
 	private static void matchHistory()
 	{
+		//Inserir partida, alterar partida,
 		printMatchHistoryOptions();
 		Scanner matchOptionScanner = new Scanner(System.in);
 		String matchOptionInput = matchOptionScanner.next();
 		switch (matchOptionInput)
 		{
 			case "1" -> addMatch();
+			case "2" -> removeMatch();
+			case "4" -> viewMatch();
 			case "6" -> Console.log(matchHistory.toString());
 			default -> Console.log(INVALID_INPUT_DEFAULT_MESSAGE);
+		}
+	}
+
+	private static void viewMatch()
+	{
+		int input = Console.getUserIntInput("Insira o índice da partida que deseja remover", INVALID_INPUT_DEFAULT_MESSAGE);
+		try
+		{
+			matchHistory.getMatch(input);
+		}
+		catch (IndexOutOfBoundsException exception) {
+			Console.log(INVALID_INPUT_DEFAULT_MESSAGE);
+		}
+	}
+
+
+	private static void removeMatch()
+	{
+		int input = Console.getUserIntInput("Insira o índice da partida que deseja remover", INVALID_INPUT_DEFAULT_MESSAGE);
+		try
+		{
+			matchHistory.removeMatch(input);
+		}
+		catch (IndexOutOfBoundsException exception)
+		{
+			Console.log(INVALID_INPUT_DEFAULT_MESSAGE);
 		}
 	}
 
@@ -91,11 +120,10 @@ public class Interface
 		Console.log("""
 					====== MENU DE PARTIDAS ======
 					1. Insira uma partida
-					2. Exclua uma partida
-					3. Altere uma partida
-					4. Consulte uma partida
-					5. Ordena as partidas por data
-					6. Exibe o histórico de partidas
+					2. Altere o nome de um time
+					3. Consulte uma partida
+					4. Ordena as partidas por data
+					5. Exibe o histórico de partidas
 					""");
 	}
 }

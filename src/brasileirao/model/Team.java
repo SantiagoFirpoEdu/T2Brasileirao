@@ -100,7 +100,9 @@ public class Team
 		return name;
 	}
 
-	private void setName(String name)
+
+
+	public void setName(String name)
 	{
 		if (name.isBlank()) return;
 		this.name = name;

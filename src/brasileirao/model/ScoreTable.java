@@ -4,6 +4,7 @@ import brasileirao.model.collections.CustomList;
 import brasileirao.utility.Console;
 
 import java.util.Comparator;
+import java.util.function.Predicate;
 
 public class ScoreTable
 {
@@ -31,6 +32,14 @@ public class ScoreTable
         {
             Console.log("O índice inserido é inválido.");
         }
+    }
+
+    private void changeName(String oldName, String newName)
+    {
+        Predicate<Team> namePredicate = (Team team) -> team.getName().equals(oldName);
+        int index = table.linearSearch(namePredicate);
+        if (index == CustomList.INVALID_INDEX) return;
+        table.get(index).setName(newName);
     }
 
 

@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 
 public class CustomList<TElementType>
 {
-	private static final int INVALID_INDEX = -1;
+	public static final int INVALID_INDEX = -1;
 	private Object[] data;
 	private int size;
 	private static final int DEFAULT_CAPACITY = 10;
