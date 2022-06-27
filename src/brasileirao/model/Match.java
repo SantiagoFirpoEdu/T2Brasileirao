@@ -1,4 +1,4 @@
-package com.brasileirao.model;
+package brasileirao.model;
 
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;

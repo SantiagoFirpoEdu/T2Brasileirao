@@ -1,4 +1,4 @@
-package com.brasileirao.model;
+package brasileirao.model;
 
 public record MatchDate(int day, int month, int hour, int minute)
 {

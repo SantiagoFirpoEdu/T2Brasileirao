@@ -1,4 +1,4 @@
-package com.brasileirao.utility;
+package brasileirao.utility;
 
 import java.util.Scanner;
 

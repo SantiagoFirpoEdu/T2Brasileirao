@@ -1,8 +1,7 @@
-package com.brasileirao.model;
+package brasileirao.model;
 
-import com.brasileirao.model.collections.CustomList;
+import brasileirao.model.collections.CustomList;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 
 public class MatchHistory

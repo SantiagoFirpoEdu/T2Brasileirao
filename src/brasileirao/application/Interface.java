@@ -1,7 +1,8 @@
-package com.brasileirao.application;
+package brasileirao.application;
 
-import com.brasileirao.model.*;
-import com.brasileirao.utility.Console;
+
+import brasileirao.model.*;
+import brasileirao.utility.Console;
 
 import java.util.Scanner;
 import java.util.UUID;

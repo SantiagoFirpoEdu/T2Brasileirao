@@ -1,7 +1,7 @@
-package com.brasileirao.model;
+package brasileirao.model;
 
-import com.brasileirao.model.collections.CustomList;
-import com.brasileirao.utility.Console;
+import brasileirao.model.collections.CustomList;
+import brasileirao.utility.Console;
 
 import java.util.Comparator;
 

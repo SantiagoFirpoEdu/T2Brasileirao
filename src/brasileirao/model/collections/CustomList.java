@@ -1,4 +1,4 @@
-package com.brasileirao.model.collections;
+package brasileirao.model.collections;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -118,6 +118,62 @@ public class CustomList<TElementType>
 				}
 			}
 			if (isSorted) return;
+		}
+	}
+
+	public final void mergeSort(Comparator<TElementType> comparator)
+	{
+		if (size > 1)
+		{
+			int middle = size / 2;
+			CustomList<TElementType> left = new CustomList<>(middle);
+			CustomList<TElementType> right = new CustomList<>(size - middle);
+			for (int i = 0; i < middle; i++)
+			{
+				left.add(get(i));
+			}
+			for (int i = middle; i < size; i++)
+			{
+				right.add(get(i));
+			}
+			left.mergeSort(comparator);
+			right.mergeSort(comparator);
+			merge(this, left, right, comparator);
+		}
+	}
+
+	 private static <TElementType> void merge(CustomList<TElementType> target, CustomList<TElementType> left, CustomList<TElementType> right, Comparator<TElementType> comparator)
+	{
+		int leftIndex = 0;
+		int rightIndex = 0;
+		int targetIndex = 0;
+		while (leftIndex < left.size && rightIndex < right.size)
+		{
+			TElementType leftElement = left.get(leftIndex);
+			TElementType rightElement = right.get(rightIndex);
+			if (leftElement != null && rightElement != null && comparator.compare(leftElement, rightElement) < 0)
+			{
+				target.set(targetIndex, leftElement);
+				leftIndex++;
+			}
+			else
+			{
+				target.set(targetIndex, rightElement);
+				rightIndex++;
+			}
+			targetIndex++;
+		}
+		while (leftIndex < left.size)
+		{
+			target.set(targetIndex, left.get(leftIndex));
+			leftIndex++;
+			targetIndex++;
+		}
+		while (rightIndex < right.size)
+		{
+			target.set(targetIndex, right.get(rightIndex));
+			rightIndex++;
+			targetIndex++;
 		}
 	}
 }
