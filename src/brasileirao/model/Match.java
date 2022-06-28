@@ -52,7 +52,7 @@ public class Match
 	@Override
 	public final String toString()
 	{
-		SimpleDateFormat formatter = new SimpleDateFormat("hh:mm dd/MM");
+		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd/MM");
 		return MessageFormat.format("Partida: {0} {1} x {2} {3} {4}",
 				homeTeam.getName(),
 				homeTeamGoals,

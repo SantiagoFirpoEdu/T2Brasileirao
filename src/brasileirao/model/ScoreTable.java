@@ -68,6 +68,8 @@ public class ScoreTable {
 		{
 			Team team = table.get(i);
 			if (team == null) continue;
+			stringBuilder.append(i + 1);
+			stringBuilder.append("o lugar\n");
 			stringBuilder.append(team);
 			stringBuilder.append('\n');
 		}

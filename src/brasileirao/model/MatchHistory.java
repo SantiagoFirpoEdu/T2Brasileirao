@@ -47,7 +47,7 @@ public class MatchHistory {
 		{
 			Match match = matches.get(i);
 			if (match == null) continue;
-			teamsDisplay.append(i);
+			teamsDisplay.append(i + 1);
 			teamsDisplay.append('-');
 			teamsDisplay.append(match);
 			teamsDisplay.append('\n');
