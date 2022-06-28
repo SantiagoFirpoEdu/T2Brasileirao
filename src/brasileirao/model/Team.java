@@ -72,16 +72,7 @@ public class Team
 	public final String toString()
 	{
 		return MessageFormat.format(
-				"Código do Clube: {0},\n Nome do Clube: ''{1}'',\nGols pró: {2},
-			   Gols contra: {3},
-			   Total de jogos: {4},
-			   Total de vitórias: {5},
-			   Total de empates: {6},
-			   Total de derrotas: {7},
-			   Total de pontos: {8},
-			   Saldo de gols: {9},
-			   Aproveitamento: {10}%
-			   """,
+				"Código do Clube: {0},\n Nome do Clube: ''{1}'',\nGols pró: {2},Gols contra: {3},\nTotal de jogos: {4},\nTotal de vitórias: {5},\nTotal de empates: {6},\nTotal de derrotas: {7},\nTotal de pontos: {8},\nSaldo de gols: {9},\nAproveitamento: {10}%\n ",
 				id,
 				name,
 				goalsFor,
@@ -99,8 +90,6 @@ public class Team
 	{
 		return name;
 	}
-
-
 
 	public final void setName(String name)
 	{

@@ -71,10 +71,10 @@ public class MatchHistory {
    */
   public final Match getMatchByDate(MatchDate dateSearch) {
 		int index = matches.linearSearch((Match match) ->
-				match.date.get(Calendar.DAY_OF_MONTH) == dateSearch.day()
-			&& match.date.get(Calendar.MONTH) == dateSearch.month() - 1
-			&& match.date.get(Calendar.HOUR_OF_DAY) == dateSearch.hour()
-			&& match.date.get(Calendar.MINUTE) == dateSearch.minute());
+				match.date.get(Calendar.DAY_OF_MONTH) == dateSearch.day
+			&& match.date.get(Calendar.MONTH) == dateSearch.month - 1
+			&& match.date.get(Calendar.HOUR_OF_DAY) == dateSearch.hour
+			&& match.date.get(Calendar.MINUTE) == dateSearch.minute);
 		if (index == CustomList.INVALID_INDEX)
 		{
 			return null;

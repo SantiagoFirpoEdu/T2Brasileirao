@@ -22,21 +22,21 @@ public class Match
 	             int awayTeamGoals, MatchDate matchDate)
 	{
 		date = Calendar.getInstance();
-		if (matchDate.day() >= 1 && matchDate.day() <= 31)
+		if (matchDate.day >= 1 && matchDate.day <= 31)
 		{
-			date.set(Calendar.DAY_OF_MONTH, matchDate.day());
+			date.set(Calendar.DAY_OF_MONTH, matchDate.day);
 		}
-		if (matchDate.month() >= 1 && matchDate.month() <= 12)
+		if (matchDate.month >= 1 && matchDate.month <= 12)
 		{
-			date.set(Calendar.MONTH, matchDate.month() - 1);
+			date.set(Calendar.MONTH, matchDate.month - 1);
 		}
-		if (matchDate.hour() >= 0 && matchDate.hour() <= 23)
+		if (matchDate.hour >= 0 && matchDate.hour <= 23)
 		{
-			date.set(Calendar.HOUR_OF_DAY, matchDate.hour());
+			date.set(Calendar.HOUR_OF_DAY, matchDate.hour);
 		}
-		if (matchDate.minute() >= 0 && matchDate.minute() <= 59)
+		if (matchDate.minute >= 0 && matchDate.minute <= 59)
 		{
-			date.set(Calendar.MINUTE, matchDate.minute());
+			date.set(Calendar.MINUTE, matchDate.minute);
 		}
 		this.homeTeam = homeTeam;
 		this.awayTeam = awayTeam;
