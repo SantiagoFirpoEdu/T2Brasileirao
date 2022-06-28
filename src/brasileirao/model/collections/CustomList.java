@@ -7,6 +7,8 @@ import java.util.function.Predicate;
 public class CustomList<TElementType>
 {
 	public static final int INVALID_INDEX = -1;
+
+	/** Array de dados internos da Lista. É do tipo Object devido às limitações de Generics em Java*/
 	private Object[] data;
 	private int size;
 	private static final int DEFAULT_CAPACITY = 10;
@@ -32,8 +34,10 @@ public class CustomList<TElementType>
 		assertIndexIsValid(index);
 		return (TElementType) data[index];
 	}
-	public final void add(TElementType newElement)
-	{
+  /** Adiciona um elemento ao final da lista
+   * @param newElement o elemento a ser adicionado
+   */
+	public final void add(TElementType newElement) {
 		checkInvariants();
 		data[size++] = newElement;
 	}
@@ -62,10 +66,12 @@ public class CustomList<TElementType>
 		data[index] = newElement;
 	}
 
-	public final int size()
-	{
-		return size;
-	}
+	/**
+	* @return o número de elementos na lista
+	*/
+	public final int size() {
+								  return size;
+											  }
 
 	/** Verifica se o index dado é valido para esta array e acusa uma exceção se este não for o caso
 	* @param index o índice a ser testado
@@ -82,16 +88,16 @@ public class CustomList<TElementType>
 		}
 	}
 
-	private void checkInvariants()
-	{
+	/** Garante a consistência da lista*/
+	private void checkInvariants() {
 		if (size >= data.length)
 		{
 			resizeArray();
 		}
 	}
 
-	private void resizeArray()
-	{
+	/** Redimensiona a array data*/
+	private void resizeArray() {
 		Object[] newArray = new Object[2 * data.length];
 		System.arraycopy(data, 0, newArray, 0, data.length);
 		data = newArray;
@@ -99,12 +105,14 @@ public class CustomList<TElementType>
 
 	@Override
 	public final String toString()
-	{
-		return "List{" + "data=" + Arrays.toString(data) + ", size=" + size + '}';
-	}
+									  {
+										 return "List{" + "data=" + Arrays.toString(data) + ", size=" + size + '}';
+																												   }
 
-	public final void bubbleSort(Comparator<TElementType> comparator)
-	{
+	/** Ordena a lista de acordo com o comparador dado. Complexidade do sort é O(n^2), podendo ser melhorada utilizando o merge sort
+	* @param comparator o comparador a ser utilizado para ordenar a lista
+	*/
+	public final void bubbleSort(Comparator<TElementType> comparator) {
 		for (int i = 1; i < size; i++)
 		{
 			boolean isSorted = true;
@@ -123,63 +131,11 @@ public class CustomList<TElementType>
 		}
 	}
 
-	public final void mergeSort(Comparator<TElementType> comparator)
-	{
-		if (size > 1)
-		{
-			int middle = size / 2;
-			CustomList<TElementType> left = new CustomList<>(middle);
-			CustomList<TElementType> right = new CustomList<>(size - middle);
-			for (int i = 0; i < middle; i++)
-			{
-				left.add(get(i));
-			}
-			for (int i = middle; i < size; i++)
-			{
-				right.add(get(i));
-			}
-			left.mergeSort(comparator);
-			right.mergeSort(comparator);
-			merge(this, left, right, comparator);
-		}
-	}
-
-	 private static <TElementType> void merge(CustomList<TElementType> target, CustomList<TElementType> left, CustomList<TElementType> right, Comparator<TElementType> comparator)
-	{
-		int leftIndex = 0;
-		int rightIndex = 0;
-		int targetIndex = 0;
-		while (leftIndex < left.size && rightIndex < right.size)
-		{
-			TElementType leftElement = left.get(leftIndex);
-			TElementType rightElement = right.get(rightIndex);
-			if (leftElement != null && rightElement != null && comparator.compare(leftElement, rightElement) < 0)
-			{
-				target.set(targetIndex, leftElement);
-				leftIndex++;
-			}
-			else
-			{
-				target.set(targetIndex, rightElement);
-				rightIndex++;
-			}
-			targetIndex++;
-		}
-		while (leftIndex < left.size)
-		{
-			target.set(targetIndex, left.get(leftIndex));
-			leftIndex++;
-			targetIndex++;
-		}
-		while (rightIndex < right.size)
-		{
-			target.set(targetIndex, right.get(rightIndex));
-			rightIndex++;
-			targetIndex++;
-		}
-	}
-
-	public int linearSearch(Predicate<TElementType> predicate)
+	/** Realiza uma busca linear na lista, procurando o elemento dado. A complexidade é O(n), podendo ser melhorada utilizando o binary search (se a lista estiver ordenada utilizando o merge sort)
+	* @param predicate o predicado a ser utilizado para buscar o elemento
+	* @return o índice do elemento encontrado ou INVALID_INDEX se não encontrado
+	*/
+	public final int linearSearch(Predicate<TElementType> predicate)
 	{
 		for (int i = 0; i < size(); i++)
 		{

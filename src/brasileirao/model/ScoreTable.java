@@ -6,8 +6,8 @@ import java.util.Comparator;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public class ScoreTable
-{
+/** Guarda e atualiza as pontuações de todos os times do campeonato*/
+public class ScoreTable {
 	private final CustomList<Team> table;
 
 	public ScoreTable()
@@ -41,6 +41,11 @@ public class ScoreTable
 		return true;
 	}
 
+	/**
+	 * Busca o time utilizando o índice da tabela
+	 * @param index o índice do time na tabela
+	 * @return o time buscado, null se o índice não existir
+	 */
 	public final Team getTeam(int index)
 	{
 		if (index >= 0 && index < table.size())
@@ -95,8 +100,11 @@ public class ScoreTable
 	{
 		return table.linearSearch((Team team) -> homeTeamName.equals(team.getName()));
 	}
-	public final Team getTeamByName(String homeTeamName)
-	{
+  /** Busca um time pelo nome e retorna a sua referência.
+   * @param homeTeamName o nome do time desejado
+   * @return A referência do time desejado. null se o elemento não existe
+   */
+  public final Team getTeamByName(String homeTeamName) {
 		int index = getTeamIndexByName(homeTeamName);
 		if (index == CustomList.INVALID_INDEX)
 		{

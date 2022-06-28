@@ -4,6 +4,9 @@ import java.text.MessageFormat;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+* Modela a pontuação de um time
+*/
 public class Team
 {
 	private UUID id;
@@ -66,7 +69,7 @@ public class Team
 
 
 	@Override
-	public String toString()
+	public final String toString()
 	{
 		return MessageFormat.format(
 				"""
@@ -102,7 +105,7 @@ public class Team
 
 
 
-	public void setName(String name)
+	public final void setName(String name)
 	{
 		if (name.isBlank()) return;
 		this.name = name;
@@ -163,7 +166,7 @@ public class Team
 		this.id = new UUID(id.getMostSignificantBits(), id.getLeastSignificantBits());
 	}
 	@Override
-	public boolean equals(Object other)
+	public final boolean equals(Object other)
 	{
 		if (this == other)
 		{
@@ -185,7 +188,7 @@ public class Team
 	}
 
 	@Override
-	public int hashCode()
+	public final int hashCode()
 	{
 		return Objects.hash(id, name, goalsFor, goalsAgainst, matchesPlayed, wins, draws, losses, points, goalBalance, winRatePointWise);
 	}

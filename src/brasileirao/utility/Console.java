@@ -2,8 +2,8 @@ package brasileirao.utility;
 
 import java.util.Scanner;
 
-public class Console
-{
+/** Classe utilitária de IO e Console*/
+public class Console {
 	private Console() {}
 
 	/**

@@ -68,6 +68,10 @@ public class Interface
 
 	}
 
+/**
+* Comando para alterar o nome de um time.
+ * @param inputTokens array de tokens de input separados utilzando split
+*/
 	private static void changeTeamName(String[] inputTokens)
 	{
 		if (inputTokens.length < 4)
@@ -84,6 +88,9 @@ public class Interface
 		}
 	}
 
+/**
+* Comando para consultar uma partida
+*/
 	private static void checkMatch()
 	{
 		MatchDate dateSearch = getMatchDateInput();
@@ -98,6 +105,10 @@ public class Interface
 		}
 	}
 
+/**
+* Comando para consultar um time
+ * @param inputTokens array de tokens de input separados utilizando split
+*/
 	private static void checkTeam(String[] inputTokens)
 	{
 		if (inputTokens.length < 2)
@@ -119,6 +130,10 @@ public class Interface
 		}
 	}
 
+/**
+* Utilitário para obter input para gerar uma partida
+ * @return
+*/
 	private static Match getMatchInput()
 	{
 		Team homeTeam = getUserInputTeam("Por favor, insira o nome do time da casa: ");
@@ -131,6 +146,10 @@ public class Interface
 		return new Match(homeTeam, awayTeam, homeTeamGoals, awayTeamGoals, matchDate);
 	}
 
+/**
+* Utilitário para obter input para gerar uma data de partida
+ * @return a data de partida
+*/
 	private static MatchDate getMatchDateInput()
 	{
 		int matchDay = Console.getUserIntInput("Por favor, insira o dia da partida (entre 01 e 31)", INVALID_INPUT_DEFAULT_MESSAGE, "Número inválido, por favor insira um número entre 01 e 31.", 1, 32);
@@ -140,6 +159,11 @@ public class Interface
 		return new MatchDate(matchDay, matchMonth, matchHour, matchMinute);
 	}
 
+/**
+* Utilitário para obter input para buscar um time ou gerá-lo caso não exista
+ * @param message mensagem a ser exibida para o usuário
+ * @return time gerado
+*/
 	private static Team getUserInputTeam(String message)
 	{
 		String homeTeamName = Console.getStringUserInput(message);

@@ -5,8 +5,8 @@ import brasileirao.model.collections.CustomList;
 import java.util.Calendar;
 import java.util.Comparator;
 
-public class MatchHistory
-{
+/** Gerencia a lista de todas as partidas inseridas pelo usuário*/
+public class MatchHistory {
 	private final CustomList<Match> matches;
 
 	/**
