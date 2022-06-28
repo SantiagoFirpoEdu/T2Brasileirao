@@ -30,14 +30,16 @@ public class CustomList<TElementType>
    * @return retorna o elemento naquele índice. Pode retornar null caso este tenha sido adicionado previamente
    * @throws IndexOutOfBoundsException se o index dado é menor que zero ou maior ou igual que 'size'
    */
-	public final TElementType get(int index) throws ClassCastException, IndexOutOfBoundsException {
+	public final TElementType get(int index) throws ClassCastException, IndexOutOfBoundsException
+	{
 		assertIndexIsValid(index);
 		return (TElementType) data[index];
 	}
   /** Adiciona um elemento ao final da lista
    * @param newElement o elemento a ser adicionado
    */
-	public final void add(TElementType newElement) {
+	public final void add(TElementType newElement)
+	{
 		checkInvariants();
 		data[size++] = newElement;
 	}
@@ -47,7 +49,8 @@ public class CustomList<TElementType>
 	* @return o elemento removido
 	* @throws IndexOutOfBoundsException se index for menor que zero ou, maior ou igual a size
 	*/
-	public final TElementType remove(int index) throws IndexOutOfBoundsException {
+	public final TElementType remove(int index) throws IndexOutOfBoundsException
+	{
 		assertIndexIsValid(index);
 		TElementType removedElement = (TElementType) data[index];
 		size--;
@@ -77,7 +80,8 @@ public class CustomList<TElementType>
 	* @param index o índice a ser testado
 	* @throws IndexOutOfBoundsException se index for menor que zero ou, maior ou igual a size
 	*/
-	private void assertIndexIsValid(int index) throws IndexOutOfBoundsException {
+	private void assertIndexIsValid(int index) throws IndexOutOfBoundsException
+	{
 		if (index < 0)
 		{
 			throw new IndexOutOfBoundsException("Index must be greater than or equal to zero, but is " + index);
@@ -89,7 +93,8 @@ public class CustomList<TElementType>
 	}
 
 	/** Garante a consistência da lista*/
-	private void checkInvariants() {
+	private void checkInvariants()
+	{
 		if (size >= data.length)
 		{
 			resizeArray();
@@ -97,7 +102,8 @@ public class CustomList<TElementType>
 	}
 
 	/** Redimensiona a array data*/
-	private void resizeArray() {
+	private void resizeArray()
+	{
 		Object[] newArray = new Object[2 * data.length];
 		System.arraycopy(data, 0, newArray, 0, data.length);
 		data = newArray;
@@ -112,7 +118,8 @@ public class CustomList<TElementType>
 	/** Ordena a lista de acordo com o comparador dado. Complexidade do sort é O(n^2), podendo ser melhorada utilizando o merge sort
 	* @param comparator o comparador a ser utilizado para ordenar a lista
 	*/
-	public final void bubbleSort(Comparator<TElementType> comparator) {
+	public final void bubbleSort(Comparator<TElementType> comparator)
+	{
 		for (int i = 1; i < size; i++)
 		{
 			boolean isSorted = true;
