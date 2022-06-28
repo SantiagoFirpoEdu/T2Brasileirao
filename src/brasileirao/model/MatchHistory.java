@@ -2,6 +2,7 @@ package brasileirao.model;
 
 import brasileirao.model.collections.CustomList;
 
+import java.util.Calendar;
 import java.util.Comparator;
 
 public class MatchHistory
@@ -22,22 +23,7 @@ public class MatchHistory
 	public final void insertMatch(Match match)
 	{
 		matches.add(match);
-	}
-
-	/**
-	 * Exclui uma partida da lista
-	 */
-	public final void removeMatch(int index) throws IndexOutOfBoundsException
-	{
-		matches.remove(index);
-	}
-
-	/**
-	 * Altera uma partida da lista
-	 */
-	public final void changeMatch(int index, Match match) throws IndexOutOfBoundsException
-	{
-		matches.set(index, match);
+		match.applyResultsToTeams();
 	}
 
 	/**
@@ -52,7 +38,7 @@ public class MatchHistory
 	 * Exibe a lista de partidas
 	 */
 	@Override
-	public String toString()
+	public final String toString()
 	{
 		orderMatchesByDate();
 		StringBuilder teamsDisplay = new StringBuilder();
@@ -79,15 +65,20 @@ public class MatchHistory
 		matches.bubbleSort(matchDateComparator);
 	}
 
-	/**
-	 * Itera pela lista de partidas e aplica o seu resultado para ambos os times que jogaram nela
-	 * */
-	public final void updateScores() {
-		for (int i = 0; i < matches.size(); i++)
+  /** Retorna uma referência para um objeto Match que tenha ocorrido na data especificada.
+   * @param dateSearch A data que será usada para buscar o jogo.
+   * @return Um objeto Match que tenha ocorrido na data especificada. null se não existir um jogo na data especificada.
+   */
+  public final Match getMatchByDate(MatchDate dateSearch) {
+		int index = matches.linearSearch((Match match) ->
+				match.date.get(Calendar.DAY_OF_MONTH) == dateSearch.day()
+			&& match.date.get(Calendar.MONTH) == dateSearch.month() - 1
+			&& match.date.get(Calendar.HOUR_OF_DAY) == dateSearch.hour()
+			&& match.date.get(Calendar.MINUTE) == dateSearch.minute());
+		if (index == CustomList.INVALID_INDEX)
 		{
-			Match match = matches.get(i);
-			if (match == null) continue;
-			match.applyResultsToTeams();
+			return null;
 		}
+		return matches.get(index);
 	}
 }

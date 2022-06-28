@@ -32,23 +32,13 @@ public class Console
 	}
 
 
-	public static int getUserIntInput(String message, String errorMessage, String outOfBounds, int minValue, int maxValue)
+	public static int getUserIntInput(String message, String errorMessage, String outOfBounds, int minInclusive, int maxExclusive)
 	{
-		Scanner scanner = new Scanner(System.in);
-		String rawInput;
 		int input = getUserIntInput(message, errorMessage);
-		while (input <= minValue || input > maxValue)
+		while (input < minInclusive || input >= maxExclusive)
 		{
-			rawInput = scanner.next();
 			log(outOfBounds);
-			try
-			{
-				input = Integer.parseInt(rawInput);
-			}
-			catch (NumberFormatException exception)
-			{
-				log(errorMessage);
-			}
+			input = getUserIntInput(message, errorMessage);
 		}
 		return input;
 	}
@@ -58,6 +48,6 @@ public class Console
 	{
 		Scanner scanner = new Scanner(System.in);
 		log(message);
-		return scanner.next();
+		return scanner.nextLine();
 	}
 }
