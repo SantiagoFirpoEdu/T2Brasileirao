@@ -18,6 +18,7 @@ public class Interface
 	public static final String INVALID_INPUT_DEFAULT_MESSAGE = "Entrada inválida.";
 	public static final MatchHistory matchHistory = new MatchHistory();
 	public static final ScoreTable scoreTable = new ScoreTable();
+	public static final String COMMAND_PALETTE = "Paleta de comandos:\nadicionar partida - adiciona nova partida ao histórico e atualiza resultados da tabela\nalterar nome do time |[nome antigo]| |[nome novo]| - tenta alterar o nome do time antigo para o nome novo \nconsultar partidas - exibe o histórico completo de partidas ordenadas por data\nconsultar times - exibe a tabela de times ordenada por pontuação\nconsultar time |[nome do time]| - tenta exibir informações sobre o time inserido\nconsultar partida\nsair - sai do programa ";
 
 	private Interface() {}
 
@@ -27,17 +28,7 @@ public class Interface
 		while (!shouldQuit)
 		{
 			String[] inputTokens = Console.getStringUserInput(
-                    """
-					Paleta de comandos:
-					
-					adicionar partida - adiciona nova partida ao histórico e atualiza resultados da tabela
-					alterar nome do time |[nome antigo]| |[nome novo]| - tenta alterar o nome do time antigo para o nome novo
-					consultar partidas - exibe o histórico completo de partidas ordenadas por data
-					consultar times - exibe a tabela de times ordenada por pontuação
-					consultar time |[nome do time]| - tenta exibir informações sobre o time inserido
-					consultar partida
-					sair - sai do programa
-					""")
+							COMMAND_PALETTE)
 					.split("\\|");
 			if (inputTokens.length == 0)
 			{
@@ -46,23 +37,50 @@ public class Interface
 			}
 			switch (inputTokens[0])
 			{
-				case "adicionar partida", "adicionar partida " ->
+				case "adicionar partida":
+				case "adicionar partida ":
 				{
 					Match newMatch = getMatchInput();
 					matchHistory.insertMatch(newMatch);
 					Console.log(MessageFormat.format("Partida criada com sucesso: {0}", newMatch));
+					break;
 				}
-				case "alterar nome do time", "alterar nome do time " -> changeTeamName(inputTokens);
-				case "consultar partidas", "consultar partidas " -> Console.log(matchHistory.toString());
-				case "consultar times", "consultar times " -> Console.log(scoreTable.toString());
-				case "consultar time", "consultar time " -> checkTeam(inputTokens);
-				case "consultar partida", "consultar partida " -> checkMatch();
-				case "sair" ->
+				case "alterar nome do time ":
+				{
+					changeTeamName(inputTokens);
+					break;
+				}
+				case "consultar partidas":
+				{
+					Console.log(matchHistory.toString());
+					break;
+				}
+				case "consultar times":
+				{
+					Console.log(scoreTable.toString());
+					break;
+				}
+				case "consultar time ":
+				{
+					checkTeam(inputTokens);
+					break;
+				}
+				case "consultar partida":
+				{
+					checkMatch();
+					break;
+				}
+				case "sair":
 				{
 					Console.log("Saindo do programa..");
 					shouldQuit = true;
+					break;
 				}
-				default -> Console.log("Comando inválido. Por favor, tente novamente.");
+				default:
+				{
+					Console.log("Comando inválido. Por favor, tente novamente.");
+					break;
+				}
 			}
 		}
 

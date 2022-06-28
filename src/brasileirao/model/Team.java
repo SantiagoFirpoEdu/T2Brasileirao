@@ -72,10 +72,7 @@ public class Team
 	public final String toString()
 	{
 		return MessageFormat.format(
-				"""
-			   Código do Clube: {0},
-			   Nome do Clube: ''{1}'',
-			   Gols pró: {2},
+				"Código do Clube: {0},\n Nome do Clube: ''{1}'',\nGols pró: {2},
 			   Gols contra: {3},
 			   Total de jogos: {4},
 			   Total de vitórias: {5},
