@@ -21,7 +21,7 @@ public class Team
 	private int goalBalance;
 	private double winRatePointWise;
 
-	public Team(UUID id, String name) throws IllegalArgumentException
+	public Team(UUID id, String name)
 	{
 		this.setId(id);
 		this.name = name.isBlank() ? ("Time " + id) : name;
