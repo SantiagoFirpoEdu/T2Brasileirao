@@ -18,7 +18,7 @@ public class Interface
 	public static final String INVALID_INPUT_DEFAULT_MESSAGE = "Entrada inválida.";
 	public static final MatchHistory matchHistory = new MatchHistory();
 	public static final ScoreTable scoreTable = new ScoreTable();
-	public static final String COMMAND_PALETTE = "Paleta de comandos:\nadicionar partida - adiciona nova partida ao histórico e atualiza resultados da tabela\nalterar nome do time |[nome antigo]| |[nome novo]| - tenta alterar o nome do time antigo para o nome novo \nconsultar partidas - exibe o histórico completo de partidas ordenadas por data\nconsultar times - exibe a tabela de times ordenada por pontuação\nconsultar time |[nome do time]| - tenta exibir informações sobre o time inserido\nconsultar partida\nsair - sai do programa ";
+	public static final String COMMAND_PALETTE = "Paleta de comandos:\nadicionar partida - adiciona nova partida ao histórico e atualiza resultados da tabela\nalterar nome do time \"nome antigo\" \"nome novo\" - tenta alterar o nome do time antigo para o nome novo \nconsultar partidas - exibe o histórico completo de partidas ordenadas por data\nconsultar times - exibe a tabela de times ordenada por pontuação\nconsultar time \"nome do time\" - tenta exibir informações sobre o time inserido\nconsultar partida\nsair - sai do programa ";
 
 	private Interface() {}
 
@@ -29,10 +29,10 @@ public class Interface
 		{
 			String[] inputTokens = Console.getStringUserInput(
 							COMMAND_PALETTE)
-					.split("\\|");
+					.split("\"");
 			if (inputTokens.length == 0)
 			{
-				Console.log("Escolha inválida. Saindo do programa..");
+				Console.log("Escolha inválida. Por favor insira um comando da paleta: ");
 				continue;
 			}
 			switch (inputTokens[0])
@@ -150,7 +150,7 @@ public class Interface
 
 /**
 * Utilitário para obter input para gerar uma partida
- * @return
+ * @return o objeto Match gerado pelo input do usuário
 */
 	private static Match getMatchInput()
 	{
