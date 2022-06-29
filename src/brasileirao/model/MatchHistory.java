@@ -1,5 +1,6 @@
 package brasileirao.model;
 
+import brasileirao.application.Interface;
 import brasileirao.model.collections.CustomList;
 
 import java.util.Calendar;

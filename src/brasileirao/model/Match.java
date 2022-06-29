@@ -1,23 +1,26 @@
 package brasileirao.model;
 
+import brasileirao.application.Interface;
+
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Match
 {
 	public final Calendar date;
-	private final Team homeTeam;
-	private final Team awayTeam;
+	private final UUID homeTeamID;
+	private final UUID awayTeamID;
 	private int homeTeamGoals;
 	private int awayTeamGoals;
 
 	/**
 	 * valida a entrada dos dados no construtor
 	 */
-	public Match(Team homeTeam,
-	             Team awayTeam,
+	public Match(Team homeTeamID,
+	             Team awayTeamID,
 	             int homeTeamGoals,
 	             int awayTeamGoals, MatchDate matchDate)
 	{
@@ -38,8 +41,8 @@ public class Match
 		{
 			date.set(Calendar.MINUTE, matchDate.minute);
 		}
-		this.homeTeam = homeTeam;
-		this.awayTeam = awayTeam;
+		this.homeTeamID = homeTeamID.getId();
+		this.awayTeamID = awayTeamID.getId();
 		this.homeTeamGoals = homeTeamGoals;
 		this.awayTeamGoals = awayTeamGoals;
 	}
@@ -49,10 +52,10 @@ public class Match
 	{
 		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd/MM");
 		return MessageFormat.format("Partida: {0} {1} x {2} {3} {4}",
-				homeTeam.getName(),
+				Interface.scoreTable.getTeamNameById(homeTeamID),
 				homeTeamGoals,
 				awayTeamGoals,
-				awayTeam.getName(), formatter.format(date.getTime()));
+				Interface.scoreTable.getTeamNameById(awayTeamID), formatter.format(date.getTime()));
 	}
 
 	/** Verifica se o time perdeu esta partida
@@ -110,7 +113,7 @@ public class Match
 	 */
 	private boolean isHomeTeam(Team team)
 	{
-		return Objects.equals(team, homeTeam);
+		return Objects.equals(team, homeTeamID);
 	}
 
 	public final int getGoalsAgainst(Team team)
@@ -151,8 +154,8 @@ public class Match
 	 * */
 	public final void applyResultsToTeams()
 	{
-		homeTeam.addMatch(this);
-		awayTeam.addMatch(this);
+		homeTeamID.addMatch(this);
+		awayTeamID.addMatch(this);
 	}
 
 	public final int getDay()
@@ -195,14 +198,14 @@ public class Match
 		date.set(Calendar.MINUTE, minute);
 	}
 
-	public final Team getHomeTeam()
+	public final Team getHomeTeamID()
 	{
-		return homeTeam;
+		return homeTeamID;
 	}
 
-	public final Team getAwayTeam()
+	public final Team getAwayTeamID()
 	{
-		return awayTeam;
+		return awayTeamID;
 	}
 
 	public final int getHomeTeamGoals()

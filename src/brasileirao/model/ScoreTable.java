@@ -4,6 +4,7 @@ import brasileirao.model.collections.CustomList;
 
 import java.util.Comparator;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.function.Predicate;
 
 /** Guarda e atualiza as pontuações de todos os times do campeonato*/
@@ -106,12 +107,24 @@ public class ScoreTable {
    * @param homeTeamName o nome do time desejado
    * @return A referência do time desejado. null se o elemento não existe
    */
-  public final Team getTeamByName(String homeTeamName) {
+  public final Team getTeamByName(String homeTeamName)
+  {
 		int index = getTeamIndexByName(homeTeamName);
 		if (index == CustomList.INVALID_INDEX)
 		{
 			return null;
 		}
 		return table.get(index);
+	}
+
+	public String getTeamNameById(UUID homeTeamID)
+	{
+		Predicate<Team> idPredicate = (Team team) -> team.getId() == homeTeamID;
+		int index = table.linearSearch(idPredicate);
+		if (index == CustomList.INVALID_INDEX)
+		{
+			return "Time inválido";
+		}
+		return table.get(index).getName();
 	}
 }
