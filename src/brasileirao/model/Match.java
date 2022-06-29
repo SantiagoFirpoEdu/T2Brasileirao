@@ -8,8 +8,8 @@ import java.util.Objects;
 public class Match
 {
 	public final Calendar date;
-	private Team homeTeam;
-	private Team awayTeam;
+	private final Team homeTeam;
+	private final Team awayTeam;
 	private int homeTeamGoals;
 	private int awayTeamGoals;
 
@@ -42,11 +42,6 @@ public class Match
 		this.awayTeam = awayTeam;
 		this.homeTeamGoals = homeTeamGoals;
 		this.awayTeamGoals = awayTeamGoals;
-	}
-
-	public Match()
-	{
-		date = Calendar.getInstance();
 	}
 
 	@Override
@@ -205,19 +200,9 @@ public class Match
 		return homeTeam;
 	}
 
-	public final void setHomeTeam(Team homeTeam)
-	{
-		this.homeTeam = homeTeam;
-	}
-
 	public final Team getAwayTeam()
 	{
 		return awayTeam;
-	}
-
-	public final void setAwayTeam(Team awayTeam)
-	{
-		this.awayTeam = awayTeam;
 	}
 
 	public final int getHomeTeamGoals()
