@@ -3,7 +3,8 @@ package brasileirao.utility;
 import java.util.Scanner;
 
 /** Classe utilitária de IO e Console*/
-public class Console {
+public class Console
+{
 	private Console() {}
 
 	/**
