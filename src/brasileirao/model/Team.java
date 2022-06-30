@@ -48,11 +48,11 @@ public class Team
 			throw new IllegalArgumentException("match parameter can't be null");
 		}
 		matchesPlayed++;
-		goalsFor += match.getGoalsFor(this);
-		goalsAgainst += match.getGoalsAgainst(this);
-		points += match.getPoints(this);
+		goalsFor += match.getGoalsFor(id);
+		goalsAgainst += match.getGoalsAgainst(id);
+		points += match.getPoints(id);
 		winRatePointWise = points / (matchesPlayed * 3.0) * 100.00;
-		if (match.won(this))
+		if (match.won(id))
 		{
 			wins++;
 		}
@@ -163,14 +163,7 @@ public class Team
 			return false;
 		}
 		Team team = (Team) other;
-		return id == team.id
-				&& goalsFor == team.goalsFor
-				&& goalsAgainst == team.goalsAgainst
-				&& matchesPlayed == team.matchesPlayed
-				&& wins == team.wins
-				&& draws == team.draws
-				&& losses == team.losses
-				&& points == team.points && goalBalance == team.goalBalance && Double.compare(team.winRatePointWise, winRatePointWise) == 0 && name.equals(team.name);
+		return id == team.id;
 	}
 
 	@Override

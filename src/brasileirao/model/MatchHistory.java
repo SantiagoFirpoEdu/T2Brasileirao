@@ -1,6 +1,5 @@
 package brasileirao.model;
 
-import brasileirao.application.Interface;
 import brasileirao.model.collections.CustomList;
 
 import java.util.Calendar;
@@ -24,7 +23,6 @@ public class MatchHistory {
 	public final void insertMatch(Match match)
 	{
 		matches.add(match);
-		match.applyResultsToTeams();
 	}
 
 	/**

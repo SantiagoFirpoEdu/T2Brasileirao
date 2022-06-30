@@ -31,7 +31,8 @@ public class ScoreTable {
 	* @param newName o novo nome do time
 	* @return true se o nome do time foi alterado com sucesso, false se o time não foi encontrado
 	*/
-	public final boolean changeName(String oldName, String newName) {
+	public final boolean changeName(String oldName, String newName)
+	{
 		Predicate<Team> namePredicate = (Team team) -> team.getName().equals(oldName);
 		int index = table.linearSearch(namePredicate);
 		if (index == CustomList.INVALID_INDEX)

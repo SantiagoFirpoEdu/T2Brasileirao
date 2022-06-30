@@ -19,8 +19,8 @@ public class Match
 	/**
 	 * valida a entrada dos dados no construtor
 	 */
-	public Match(Team homeTeamID,
-	             Team awayTeamID,
+	public Match(UUID homeTeamID,
+	             UUID awayTeamID,
 	             int homeTeamGoals,
 	             int awayTeamGoals, MatchDate matchDate)
 	{
@@ -41,8 +41,8 @@ public class Match
 		{
 			date.set(Calendar.MINUTE, matchDate.minute);
 		}
-		this.homeTeamID = homeTeamID.getId();
-		this.awayTeamID = awayTeamID.getId();
+		this.homeTeamID = homeTeamID;
+		this.awayTeamID = awayTeamID;
 		this.homeTeamGoals = homeTeamGoals;
 		this.awayTeamGoals = awayTeamGoals;
 	}
@@ -58,26 +58,13 @@ public class Match
 				Interface.scoreTable.getTeamNameById(awayTeamID), formatter.format(date.getTime()));
 	}
 
-	/** Verifica se o time perdeu esta partida
-	 * @param team o time que quer saber se perdeu
-	 * @return true se o time perdeu, false se não perdeu
-	 */
-	private boolean lost(Team team)
-	{
-		if (isHomeTeam(team))
-		{
-			return homeTeamGoals < awayTeamGoals;
-		}
-		return homeTeamGoals > awayTeamGoals;
-	}
-
 	/** Calcula os pontos que esta partida gerou para o time dado
-	 * @param team o time que quer saber os pontos
+	 * @param teamId o time que quer saber os pontos
 	 * @return os pontos que o time ganhou
 	 */
-	public final int getPoints(Team team)
+	public final int getPoints(UUID teamId)
 	{
-		if (won(team))
+		if (won(teamId))
 		{
 			return 3;
 		}
@@ -92,12 +79,12 @@ public class Match
 	}
 
 	/** Retorna o número de gols a favor do time dado
-	 * @param team o time que quer saber o número de gols a favor de si
+	 * @param teamId o time que quer saber o número de gols a favor de si
 	 * @return o número de gols a favor do time dado
 	 */
-	public final int getGoalsFor(Team team)
+	public final int getGoalsFor(UUID teamId)
 	{
-		if (isHomeTeam(team))
+		if (isHomeTeam(teamId))
 		{
 			return homeTeamGoals;
 		}
@@ -108,17 +95,17 @@ public class Match
 	}
 
 	/** Verifica se o time está jogando em casa
-	 * @param team o time que quer saber se está jogando em casa
+	 * @param teamId o time que quer saber se está jogando em casa
 	 * @return true se o time está jogando em casa, false se não está jogando em casa
 	 */
-	private boolean isHomeTeam(Team team)
+	private boolean isHomeTeam(UUID teamId)
 	{
-		return Objects.equals(team, homeTeamID);
+		return Objects.equals(teamId, homeTeamID);
 	}
 
-	public final int getGoalsAgainst(Team team)
+	public final int getGoalsAgainst(UUID teamId)
 	{
-		if (isHomeTeam(team))
+		if (isHomeTeam(teamId))
 		{
 			return awayTeamGoals;
 		}
@@ -129,16 +116,28 @@ public class Match
 	}
 
 	/** Verifica se o time dado ganhou esta partida
-	 * @param team o time que quer saber se ganhou
+	 * @param teamId o time que quer saber se ganhou
 	 * @return true se o time ganhou, false se não ganhou
 	 */
-	public final boolean won(Team team)
+	public final boolean won(UUID teamId)
 	{
-		if (isHomeTeam(team))
+		if (isHomeTeam(teamId))
 		{
 			return homeTeamGoals > awayTeamGoals;
 		}
-		return homeTeamGoals < awayTeamGoals;
+		else if (isAwayTeam(teamId))
+		{
+			return homeTeamGoals < awayTeamGoals;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	private boolean isAwayTeam(UUID teamId)
+	{
+		return Objects.equals(teamId, awayTeamID);
 	}
 
 	/** Verifica se a partida resultou em um empate
@@ -147,15 +146,6 @@ public class Match
 	public final boolean tied()
 	{
 		return homeTeamGoals == awayTeamGoals;
-	}
-
-	/**
-	 * Aplica os resultados desta partida para os dois times que jogaram nela
-	 * */
-	public final void applyResultsToTeams()
-	{
-		homeTeamID.addMatch(this);
-		awayTeamID.addMatch(this);
 	}
 
 	public final int getDay()
@@ -198,12 +188,12 @@ public class Match
 		date.set(Calendar.MINUTE, minute);
 	}
 
-	public final Team getHomeTeamID()
+	public final UUID getHomeTeamID()
 	{
 		return homeTeamID;
 	}
 
-	public final Team getAwayTeamID()
+	public final UUID getAwayTeamID()
 	{
 		return awayTeamID;
 	}

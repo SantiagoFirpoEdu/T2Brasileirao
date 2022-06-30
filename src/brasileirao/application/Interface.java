@@ -156,12 +156,17 @@ public class Interface
 	{
 		Team homeTeam = getUserInputTeam("Por favor, insira o nome do time da casa: ");
 		Team awayTeam = getUserInputTeam("Por favor, insira o nome do time visitante: ");
-		int homeTeamGoals = Console.getUserIntInput("Por favor, insira a quantidade de gols do time da casa: ",
+		int homeTeamGoals = Console.getUserIntInput(MessageFormat.format("Por favor, insira a quantidade de gols do " +
+				                                                                 "time {0}: ", homeTeam.getName()),
 				INVALID_INPUT_DEFAULT_MESSAGE, "Entrada inválida, por favor insira um número entre 0 e 100.", 0, 101);
-		int awayTeamGoals = Console.getUserIntInput("Por favor, insira a quantidade de gols do time visitante: ",
+		int awayTeamGoals = Console.getUserIntInput(MessageFormat.format("Por favor, insira a quantidade de gols do " +
+				                                                                 "time {0}: ", awayTeam.getName()),
 				INVALID_INPUT_DEFAULT_MESSAGE, "Entrada inválida, por favor insira um número entre 0 e 100.", 0, 101);
 		MatchDate matchDate = getMatchDateInput();
-		return new Match(homeTeam, awayTeam, homeTeamGoals, awayTeamGoals, matchDate);
+		Match match = new Match(homeTeam.getId(), awayTeam.getId(), homeTeamGoals, awayTeamGoals, matchDate);
+		homeTeam.addMatch(match);
+		awayTeam.addMatch(match);
+		return match;
 	}
 
 /**
@@ -184,18 +189,18 @@ public class Interface
 */
 	private static Team getUserInputTeam(String message)
 	{
-		String homeTeamName = Console.getStringUserInput(message);
-		Team homeTeam;
-		Team teamByName = scoreTable.getTeamByName(homeTeamName);
-		if (teamByName == null)
+		String teamName = Console.getStringUserInput(message);
+		Team team;
+		Team teamSearch = scoreTable.getTeamByName(teamName);
+		if (teamSearch == null)
 		{
-			homeTeam = new Team(UUID.randomUUID(), homeTeamName);
-			scoreTable.addTeam(homeTeam);
+			team = new Team(UUID.randomUUID(), teamName);
+			scoreTable.addTeam(team);
 		}
 		else
 		{
-			homeTeam = teamByName;
+			team = teamSearch;
 		}
-		return homeTeam;
+		return team;
 	}
 }
