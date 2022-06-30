@@ -8,7 +8,8 @@ import java.util.UUID;
 import java.util.function.Predicate;
 
 /** Guarda e atualiza as pontuações de todos os times do campeonato*/
-public class ScoreTable {
+public class ScoreTable
+{
 	private final CustomList<Team> table;
 
 	public ScoreTable()
