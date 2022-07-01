@@ -35,6 +35,7 @@ public class CustomList<TElementType>
 		assertIndexIsValid(index);
 		return (TElementType) data[index];
 	}
+
   /** Adiciona um elemento ao final da lista
    * @param newElement o elemento a ser adicionado
    */
